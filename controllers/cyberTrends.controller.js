@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { NEWS_API_KEY } = require("../config/env.config");
-const  CyberCrimeCategories  = require("../models/cyberCrimeCategories.model"); 
+const  Crime  = require("../models/cyberCrimeCategories.model"); 
 
 const cyberCrimeInfo = {
   cyberTrends: async (req, res) => {
@@ -21,14 +21,15 @@ const cyberCrimeInfo = {
   },
   cyberCrimeCategories : async (req, res) => {
     try {
-      const {category } = req.query ;
-      const cyberCrimeCategories = await CyberCrimeCategories.findOne({category : category}) ;
+      const {category} = req.query ;
+      console.log(category);
 
-      if(!cyberCrimeCategories){
-        return res.status(404).json({message : "Category not found"}) ;
+      const cyberCrimeCategory = await Crime.find({category:category});
+      if(!cyberCrimeCategory){
+        return res.status(404).json({message:"Category not found"}) ;
       }
 
-      res.status(200).json({ Crime : cyberCrimeCategories}) ;      
+      res.status(200).json({Crime:cyberCrimeCategory}) ;      
 
     } catch (err){
       console.error(err);

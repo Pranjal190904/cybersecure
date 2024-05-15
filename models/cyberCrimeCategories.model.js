@@ -17,4 +17,4 @@ const cyberCrimeCategoriesSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('CyberCrimeCategories', cyberCrimeCategoriesSchema) ;
+module.exports = mongoose.model('Crime', cyberCrimeCategoriesSchema) ;

@@ -9,5 +9,6 @@ module.exports = {
   CLOUD_API_SECRET : process.env.CLOUD_API_SECRET,
   CLOUD_NAME : process.env.CLOUD_NAME,
   CLOUD_API_KEY : process.env.CLOUD_API_KEY,
+  NEWS_API_KEY: process.env.NEWS_API_KEY
 };
 

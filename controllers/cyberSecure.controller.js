@@ -87,7 +87,7 @@ const complaintRegister = {
       const { acknowledgementNumber } = req.query ;
       const complaint = await Complaint.findOneAndUpdate(
         { acknowledgementNumber: acknowledgementNumber },
-        { $push: { importantDocumentsUrl: cloudinaryResponse.secure_url } }
+        { $push: { importantDocumentsUrl: cloudinaryResponse.secure_url,progress:2 } }
       );
 
       if (!complaint) {
@@ -128,8 +128,9 @@ const complaintRegister = {
     try {
       const { acknowledgementNumber } = req.body ;  
       const complaint = await Complaint.findOne({acknowledgementNumber : acknowledgementNumber}).populate('user' , 'name email') ;
+      await Complaint.findOneAndUpdate({acknowledgementNumber:acknowledgementNumber},{progress:4});
       sendBankMail("pranjalvyas45@gmail.com", acknowledgementNumber,  complaint.nationalIdImageUrl, complaint.importantDocumentsUrl);
-
+      await Complaint.findOneAndUpdate({acknowledgementNumber : acknowledgementNumber},{progress:4});
       return res.status(200).json({message : "Complaint submitted successfully and sent to bank for verification"}) ;
     } catch (err) {
       console.log(err);

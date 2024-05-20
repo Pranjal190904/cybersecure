@@ -84,6 +84,14 @@ const complaintSchema = new mongoose.Schema({
   utrNumber : {
     type : String
   },
+  progress:{
+    type:Number,
+    default:1
+  },
+  isComplaintRejected:{
+    type:Boolean,
+    default:false
+  }
 });
 
 module.exports = mongoose.model('Complaint', complaintSchema) ;

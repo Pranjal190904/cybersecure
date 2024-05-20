@@ -129,6 +129,8 @@ const admin = {
           "bankDetails.branch": branch,
           "bankDetails.freezeReason": freezeReason,
           verifyingOfficer: admin.name,
+          progress:(verificationStatus)? 3:2,
+          isComplaintRejected:(dismissalStatus)? true:false
         },
         { new: true }
       );

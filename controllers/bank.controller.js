@@ -4,15 +4,7 @@ const bankController = {
   freeze: async (req, res) => {
     try {
       const { acknowledgementNumber } = req.query;
-      const complaint = await Complaint.findOne({ acknowledgementNumber });
-
-      if (complaint.verificationStatus) {
-        return res.send("<center><h1>Account already Freezed</h1></center>");
-      }
-      if(complaint.dismissalStatus){
-        return res.send("<center><h1>Complaint Already Denied </h1></center>");
-      }
-      await complaint.updateOne({ verificationStatus: true });
+      const complaint = await Complaint.findOneAndUpdate({ acknowledgementNumber },{progress:5});
       return res.send("<center><h1>Account Freezed</h1></center>");
     } catch (err) {
       console.error(err);
@@ -22,17 +14,7 @@ const bankController = {
   denyComplaint: async (req, res) => {
     try {
       const { acknowledgementNumber } = req.query;
-      const complaint = await Complaint.findOne({ acknowledgementNumber });
-
-      if(complaint.verificationStatus){
-        return res.send("<center><h1>Account already Freezed</h1></center>");
-      }
-      if (complaint.dismissalStatus) {
-        return res.send("<center><h1>Complaint Already Denied </h1></center>");
-      }
-
-
-      await complaint.updateOne({ dismissalStatus: true }); 
+      const complaint = await Complaint.findOne({ acknowledgementNumber },{isComplaintRejected:true,dismissalStatus:true});
       return res.send("<center><h1>Complaint Denied</h1></center>");
 
     } catch (err) {

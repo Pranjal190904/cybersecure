@@ -140,7 +140,7 @@ const complaintRegister = {
   getCases : async (req, res) => {
     try {
       const userId = req.user.id;
-      const complaints = await Complaint.findOne({ user: userId }).select('progess isComplaintRejected acknowledgementaNumber date -_id');
+      const complaints = await Complaint.findOne({ user: userId }).select('progress isComplaintRejected acknowledgementNumber date -_id');
       if (!complaints) {
         return res.status(404).json({ message: "Complaint not found" });
       }

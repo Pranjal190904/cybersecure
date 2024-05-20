@@ -4,7 +4,6 @@ const corsOptions = {
   origin: [
     "http://localhost:5173",
     "http://150.50.1.50:5173",
-    "https://cyber-secure.vercel.app",
   ],
   credentials: true,
   optionsSuccessStatus: 200,

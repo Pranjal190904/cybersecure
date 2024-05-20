@@ -5,12 +5,13 @@ const User = require("../models/user.model");
 const Token = {
   signAccessToken: (id) => {
     return new Promise((resolve, reject) => {
-      const payload = {};
+      const payload = {
+        aud:id
+      };
       const secret = ACCESS_TOKEN_SECRET;
       const options = {
         expiresIn: "10d",
-        issuer: "CyberSecure",
-        audience: id,
+        issuer: "CyberSecure"
       };
       jwt.sign(payload, secret, options, (err, token) => {
         if (err) reject(err);

@@ -126,9 +126,9 @@ const complaintRegister = {
   },
   finalSubmit : async (req, res) => { 
     try {
-      const { acknowledgementNumber } = req.body ;
+      const { acknowledgementNumber } = req.body ;  
       const complaint = await Complaint.findOne({acknowledgementNumber : acknowledgementNumber}).populate('user' , 'name email') ;
-      sendBankMail("singh34rishi@gmail.com", acknowledgementNumber,  complaint.nationalIdImageUrl, complaint.importantDocumentsUrl);
+      sendBankMail("pranjalvyas45@gmail.com", acknowledgementNumber,  complaint.nationalIdImageUrl, complaint.importantDocumentsUrl);
 
       return res.status(200).json({message : "Complaint submitted successfully and sent to bank for verification"}) ;
     } catch (err) {

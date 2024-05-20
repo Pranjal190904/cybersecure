@@ -11,7 +11,7 @@ const Token = {
       const secret = ACCESS_TOKEN_SECRET;
       const options = {
         expiresIn: "10d",
-        issuer: "CyberSecure"
+        issuer: "CyberSecure",
       };
       jwt.sign(payload, secret, options, (err, token) => {
         if (err) reject(err);
@@ -22,14 +22,14 @@ const Token = {
   verifyAccessToken: async (req, res, next) => {
     try {
       
-      const token = req.header("Authorization").split(" ")[1];
+      const token = req.header("Authorization");
       if (!token) {
         return res
           .status(401)
           .json({ message: "Unauthorized - Missing token" });
       }
-
-      const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
+      const Token=token.split(" ")[1];
+      const decoded = jwt.verify(Token, ACCESS_TOKEN_SECRET);
 
       req.user = await User.findById(decoded.aud).select("-passwd");
       
